@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue dans l'entreprise !{% endblock %}
+
+{% block body %}
+
+<h1>Nos collaborateurs</h1>
+
+<div class="card-group">
+	<div>
+		{% for user in users %}
+			<div class="card" style="width: 18rem;">
+				<div class="card-body">
+					<h5 class="card-title">{{ user.firstname }} {{ user.name | upper }}</h5>
+					<h6 class="card-subtitle mb-2 text-body-secondary"> {{ user.email }}</h6>
+                    <a href="{{ path('app_employee', { "id": user.id }) }}" class="card-link">Voir les informations</a>
+				</div>
+			</div>
+		{% else %}
+			<p>Aucune offre trouvée</p>
+		{% endfor %}
+	</div>
+    </div>
+
+{% endblock %}
