@@ -1,6 +1,8 @@
 <?php
 
+
 namespace App\DataFixtures;
+
 
 use App\Entity\ContractType;
 use App\Entity\Department;
@@ -10,11 +12,13 @@ use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
+
 class AppFixtures extends Fixture
 {
-    private const CONTRACT_TYPES = [1,2,3];
+    private const CONTRACT_TYPES = [6,7,8];
 
-    private const DEPARTMENTS = [1,2,3,4];
+
+    private const DEPARTMENTS = [5,6,7,8];
     private const NB_EMPLOYEES = 50;
     public function __construct(private UserPasswordHasherInterface $hasher)
   {
@@ -23,14 +27,16 @@ class AppFixtures extends Fixture
     {
         $faker = Factory::create('fr_FR');
 
+
         $contractTypes = [];
-    
+   
         foreach (self::CONTRACT_TYPES as $contractTypeName) {
           $contractType = new ContractType();
           $contractType->setName($contractTypeName);
           $manager->persist($contractType);
           $contractTypes[] = $contractType;
         }
+
 
         $departments = [];
         foreach (self::DEPARTMENTS as $departmentName) {
@@ -39,6 +45,8 @@ class AppFixtures extends Fixture
             $manager->persist($department);
             $departments[] = $department;
         }        
+
+
 
 
         for ($i = 0; $i < self::NB_EMPLOYEES; $i++) {
@@ -54,8 +62,11 @@ class AppFixtures extends Fixture
             ->setDepartment($departments[$faker->randomElement(self::DEPARTMENTS)]);
 
 
+
+
             $manager->persist($regularUser);
         }
+
 
         $manager->flush();
     }

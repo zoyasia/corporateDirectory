@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ContractTypeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ContractTypeRepository::class)]
@@ -21,6 +22,7 @@ class ContractType
     #[ORM\OneToMany(mappedBy: 'contractType', targetEntity: User::class)]
     private Collection $users;
 
+    
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -72,4 +74,5 @@ class ContractType
 
         return $this;
     }
+
 }

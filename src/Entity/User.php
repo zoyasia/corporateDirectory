@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -43,6 +44,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToOne(inversedBy: 'users')]
     #[ORM\JoinColumn(nullable: false)]
     private ?ContractType $contractType = null;
+
+    #[ORM\Column(type: Types::DATE_IMMUTABLE, nullable: true)]
+    private ?\DateTimeImmutable $endOfContract = null;
 
     public function getId(): ?int
     {
@@ -192,4 +196,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function getEndOfContract(): ?\DateTimeImmutable
+    {
+        return $this->endOfContract;
+    }
+
+    public function setEndOfContract(?\DateTimeImmutable $endOfContract): static
+    {
+        $this->endOfContract = $endOfContract;
+
+        return $this;
+    }
+
 }
