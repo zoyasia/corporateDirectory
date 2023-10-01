@@ -20,6 +20,8 @@ class AppFixtures extends Fixture
 
     private const DEPARTMENTS = [5,6,7,8];
     private const NB_EMPLOYEES = 50;
+    private const NB_ADMIN = 2;
+
     public function __construct(private UserPasswordHasherInterface $hasher)
   {
   }
@@ -37,7 +39,6 @@ class AppFixtures extends Fixture
           $contractTypes[] = $contractType;
         }
 
-
         $departments = [];
         foreach (self::DEPARTMENTS as $departmentName) {
             $department = new Department();
@@ -45,8 +46,6 @@ class AppFixtures extends Fixture
             $manager->persist($department);
             $departments[] = $department;
         }        
-
-
 
 
         for ($i = 0; $i < self::NB_EMPLOYEES; $i++) {
